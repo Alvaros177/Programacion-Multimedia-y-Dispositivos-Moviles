@@ -1,0 +1,83 @@
+# === Android & Gradle ===
+
+*.iml
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Signing files
+*.jks
+*.keystore
+
+# IntelliJ
+.idea/
+*.iws
+*.ipr
+
+# Keystore files
+*.keystore
+*.jks
+
+# Gradle
+.gradle/
+build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Log files
+*.log
+
+# Android Studio
+.idea/
+*.iml
+*.hprof
+
+# Misc
+.DS_Store
+*.swp
+*.swo
+*.tmp
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# NDK
+obj/
+
+# Google Services (you may want to include this if you're using Firebase, but keep it out of Git!)
+google-services.json
+app/google-services.json
+
+# Crashlytics / Fabric
+app/fabric.properties
+
+# Jetpack Compose compiler cache
+.kotlinc/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Bundle generated files
+*.ap_
+*.apk
+*.aab
+
+# Others
+*.orig
+
+# Exclude virtual environments or Python cache if used
+venv/
+__pycache__/
+
+# Mac OS specific
+*.DS_Store
