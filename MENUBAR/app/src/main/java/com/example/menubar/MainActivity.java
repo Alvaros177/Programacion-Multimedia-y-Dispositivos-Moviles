@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         buttonCalcular = findViewById(R.id.buttonCalcular);
 
-        // Cambiar el texto del porcentaje al mover el SeekBar
+
         seekBarPropina.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        // Acción del botón
+
         buttonCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private void calcularTotal() {
         String textoCuenta = editTextCuenta.getText().toString().trim();
 
-        // Validar campo vacío
+
         if (textoCuenta.isEmpty()) {
             textViewResultado.setText(" Falta introducir el valor de la cuenta.");
             return;
@@ -75,19 +75,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Validar valor mínimo
+
         if (cuenta <= 0) {
             textViewResultado.setText(" El valor de la cuenta debe ser mayor que 0.");
             return;
         }
 
-        // Calcular total con propina si está marcado
+
         double total = cuenta;
         if (checkBoxPropina.isChecked()) {
             total += cuenta * (porcentajePropina / 100.0);
         }
 
-        // Método de pago
+
         int idSeleccionado = radioGroupPago.getCheckedRadioButtonId();
         String metodoPago = "";
         if (idSeleccionado == R.id.radioEfectivo) {
@@ -96,12 +96,11 @@ public class MainActivity extends AppCompatActivity {
             metodoPago = "Tarjeta";
         }
 
-        // Calificación
+
         float estrellas = ratingBar.getRating();
 
-        // Mostrar resultado
-        String resultado = String.format("💰 Total a pagar: %.2f €\nMétodo de pago: %s\n⭐ Calificación: %.1f estrellas",
-                total, metodoPago, estrellas);
+
+        String resultado = String.format("Total a pagar: %.2f €\nMétodo de pago: %s\n Calificación: %.1f estrellas",total, metodoPago, estrellas);
         textViewResultado.setText(resultado);
     }
 }
