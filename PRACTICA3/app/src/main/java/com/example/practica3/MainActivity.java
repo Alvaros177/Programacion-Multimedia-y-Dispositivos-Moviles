@@ -18,6 +18,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ArrayList<Item> lista;
     ShoppingListAdapter adapter;
+
+    String[] nombresImagenes = {
+            "Frutas",
+            "Verduras",
+            "Pan",
+            "Leche"
+    };
+
     int[] imagenes = {
             R.drawable.frutas,
             R.drawable.verduras,
@@ -26,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     int imagenSeleccionada = imagenes[0];
-    int itemSeleccionadoContextMenu = -1;
 
 
     @Override
@@ -45,15 +52,20 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         ImageSpinnerAdapter spinnerAdapter =
-                new ImageSpinnerAdapter(this, imagenes);
+                new ImageSpinnerAdapter(this, imagenes, nombresImagenes);
 
         spinner.setAdapter(spinnerAdapter);
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 imagenSeleccionada = imagenes[pos];
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         btnAgregar.setOnClickListener(v -> {
@@ -65,10 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerForContextMenu(listView);
 
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            itemSeleccionadoContextMenu = position;
-            return false;
-        });
+
     }
 
     // Crear menú contextual
@@ -82,19 +91,26 @@ public class MainActivity extends AppCompatActivity {
     // Acciones del menú contextual
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if(item.getTitle().equals("Eliminar")) {
-            lista.remove(itemSeleccionadoContextMenu);
+        AdapterView.AdapterContextMenuInfo info =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        int index = info.position;  // ← posición real del item en la lista
+
+        if (item.getTitle().equals("Eliminar")) {
+            lista.remove(index);
             adapter.notifyDataSetChanged();
         }
-        if(item.getTitle().equals("Añadir")) {
-            // Añadir una copia
-            Item it = lista.get(itemSeleccionadoContextMenu);
+
+        if (item.getTitle().equals("Añadir")) {
+            Item it = lista.get(index);
             lista.add(new Item(it.getNombre(), it.getCantidad(), it.getImagenResId()));
             adapter.notifyDataSetChanged();
         }
+
         return true;
     }
 }
+
 
 
 

@@ -5,15 +5,18 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ImageSpinnerAdapter extends BaseAdapter {
 
     Context context;
     int[] imagenes;
+    String[] nombres;
 
-    public ImageSpinnerAdapter(Context context, int[] imagenes) {
+    public ImageSpinnerAdapter(Context context, int[] imagenes, String[] nombres) {
         this.context = context;
         this.imagenes = imagenes;
+        this.nombres = nombres;
     }
 
     @Override
@@ -40,7 +43,10 @@ public class ImageSpinnerAdapter extends BaseAdapter {
         }
 
         ImageView img = convertView.findViewById(R.id.imgSpinner);
+        TextView txt = convertView.findViewById(R.id.txtNombreImg);
+
         img.setImageResource(imagenes[i]);
+        txt.setText(nombres[i]);
 
         return convertView;
     }
