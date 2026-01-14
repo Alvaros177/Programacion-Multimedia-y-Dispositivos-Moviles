@@ -2,14 +2,10 @@ package com.example.menubar;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import android.widget.*;
 import android.view.View;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup radioGroupPago;
     private RatingBar ratingBar;
     private Button buttonCalcular;
+    private AutoCompleteTextView autoCamareros;
 
     private int porcentajePropina = 10;
 
@@ -36,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
         radioGroupPago = findViewById(R.id.radioGroupPago);
         ratingBar = findViewById(R.id.ratingBar);
         buttonCalcular = findViewById(R.id.buttonCalcular);
+        autoCamareros = findViewById(R.id.autoCamareros);
+
+
+        String[] camareros = {"Carlos", "Carla", "Carmen", "Daniel", "Dario", "David"};
+
+        ArrayAdapter<String> adapterCamareros =
+                new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, camareros);
+
+        autoCamareros.setAdapter(adapterCamareros);
+        autoCamareros.setThreshold(3);
 
 
         seekBarPropina.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -61,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     private void calcularTotal() {
         String textoCuenta = editTextCuenta.getText().toString().trim();
 
-
         if (textoCuenta.isEmpty()) {
             textViewResultado.setText(" Falta introducir el valor de la cuenta.");
             return;
@@ -75,18 +81,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         if (cuenta <= 0) {
             textViewResultado.setText(" El valor de la cuenta debe ser mayor que 0.");
             return;
         }
 
-
         double total = cuenta;
         if (checkBoxPropina.isChecked()) {
             total += cuenta * (porcentajePropina / 100.0);
         }
-
 
         int idSeleccionado = radioGroupPago.getCheckedRadioButtonId();
         String metodoPago = "";
@@ -96,11 +99,19 @@ public class MainActivity extends AppCompatActivity {
             metodoPago = "Tarjeta";
         }
 
-
         float estrellas = ratingBar.getRating();
 
 
-        String resultado = String.format("Total a pagar: %.2f €\nMétodo de pago: %s\n Calificación: %.1f estrellas",total, metodoPago, estrellas);
+        String camarero = autoCamareros.getText().toString();
+        if (camarero.isEmpty()) {
+            camarero = "No especificado";
+        }
+
+        String resultado = String.format(
+                "Total a pagar: %.2f €\nMétodo de pago: %s\nCalificación: %.1f estrellas\nCamarero: %s",
+                total, metodoPago, estrellas, camarero
+        );
+
         textViewResultado.setText(resultado);
     }
 }

@@ -7,6 +7,9 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
+
+
+
     <TextView
         android:text="Gestión de cuenta del Bar"
         android:textSize="24sp"
@@ -14,7 +17,14 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+    <AutoCompleteTextView
+        android:id="@+id/autoCamareros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del camarero"
+        android:completionThreshold="3"
+        android:padding="10dp"
+        android:layout_marginTop="16dp"/>
     <EditText
         android:id="@+id/editTextCuenta"
         android:hint="Introduce el total de la cuenta"
