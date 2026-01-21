@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="#F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Título -->
+    <TextView
+        android:text="📅 Mis Eventos"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Botón -->
     <Button
         android:id="@+id/btnAgregarEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Evento"/>
+        android:text="➕ Agregar Evento"
+        android:textSize="16sp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Lista -->
     <ListView
         android:id="@+id/listViewEventos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="8dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
+        android:background="#FFFFFF"/>
 </LinearLayout>

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getNombresEventos());
         listView.setAdapter(adapter);
 
-        // Toast personalizado al pulsar un evento
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Evento evento = listaEventos.get(position);
             mostrarToast(evento);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnAgregar.setOnClickListener(v -> mostrarDialogoNombre());
     }
 
-    // Crear canal de notificación
+
     private void crearCanalNotificacion() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel canal = new NotificationChannel("evento_channel", "Eventos", NotificationManager.IMPORTANCE_DEFAULT);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // AlertDialog para nombre
+
     private void mostrarDialogoNombre() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Nuevo evento");
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // DatePickerDialog
+
     private void mostrarDatePicker(String nombre) {
         Calendar c = Calendar.getInstance();
         int anio = c.get(Calendar.YEAR);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         dpd.show();
     }
 
-    // TimePickerDialog
+
     private void mostrarTimePicker(String nombre, String fecha) {
         Calendar c = Calendar.getInstance();
         int hora = c.get(Calendar.HOUR_OF_DAY);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         tpd.show();
     }
 
-    // Agregar evento a la lista
+
     private void agregarEvento(Evento evento) {
         listaEventos.add(evento);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getNombresEventos());
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         return nombres;
     }
 
-    // Notificación
+
     private void mostrarNotificacion(Evento evento){
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
@@ -144,19 +144,13 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         manager.notify((int) System.currentTimeMillis(), builder.build());
     }
 
-    // Toast personalizado
+
     private void mostrarToast(Evento evento){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_personalizado, null);

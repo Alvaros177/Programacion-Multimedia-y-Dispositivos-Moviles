@@ -11,23 +11,23 @@ public class Evento {
         this.hora = hora;
     }
 
-    // Getter para nombre
+
     public String getNombre() {
         return nombre;
     }
 
-    // Getter para fecha
+
     public String getFecha() {
         return fecha;
     }
 
-    // Getter para hora
+
     public String getHora() {
         return hora;
     }
 
     @Override
     public String toString() {
-        return nombre; // Para mostrar en la lista
+        return nombre;
     }
 }
