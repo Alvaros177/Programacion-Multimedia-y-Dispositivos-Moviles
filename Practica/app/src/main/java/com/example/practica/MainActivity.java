@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new FirstFragment(), "Formulario");
-        adapter.addFragment(new SecondFragment(), "Pestaña 2");
-        adapter.addFragment(new ThirdFragment(), "Pestaña 3");
+        adapter.addFragment(new SecondFragment(), "Lista");
+        adapter.addFragment(new ThirdFragment(), "Contador");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
